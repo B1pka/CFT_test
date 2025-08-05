@@ -24,7 +24,7 @@ public class Options {
         }
         return config;
     }
-private void parseArguments(String[] args) {
+    private void parseArguments(String[] args) {
         for (int i = 0; i < args.length; i++) {
             String arg = args[i];
 
@@ -88,3 +88,4 @@ private void parseArguments(String[] args) {
         return inputFiles;
     }
 }
+
