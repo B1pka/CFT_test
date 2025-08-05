@@ -31,7 +31,9 @@
 ## Пример запуска
 
 Компиляция классов в байт код:
+
 javac -d build src\solve\*.java src\options\*.java src\parser\*.java src\saver\*.java src\statistics\*.java src\models\*.java
 
 Пример запуска программы:
+
 java -cp build solve.DataFilterUtility -o ./example_output -p result_ -f "exemple_in1.txt" "example_in2.txt"
