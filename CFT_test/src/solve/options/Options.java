@@ -23,7 +23,7 @@ public class Options {
         }
 
         try {
-            config.isOutputDirectoryValid(config.outputDirectory);
+            config.validateOutputDirectory(config.outputDirectory);
         } catch (IllegalArgumentException e) {
             throw new ParseOptionsException(e.getMessage(), e);
         }
@@ -63,7 +63,7 @@ public class Options {
 		}
 	}
 
-	public boolean isOutputDirectoryValid(String outputDirectory) {
+	public void validateOutputDirectory(String outputDirectory) {
 		File dir = new File(outputDirectory);
 
 		if (!dir.exists()) {
@@ -98,6 +98,7 @@ public class Options {
 		return inputFiles;
 	}
 }
+
 
 
 
