@@ -9,39 +9,38 @@ import java.util.List;
 import solve.models.ParsedData;
 
 public class DataSaver {
-	
-    public DataSaver() {
 
-    }
+	public DataSaver() {
 
-    public void saveData(ParsedData parsedData, String outputDirectory, String prefix, boolean append) {
-        System.out.println("Начало сохранения коллекций в файлы...");
-        System.out.println("Строки для сохранения: " + parsedData.getStrings());
-        System.out.println("Целые числа для сохранения: " + parsedData.getIntegers());
-        System.out.println("Числа с плавающей точкой для сохранения: " + parsedData.getFloats());
+	}
 
-        parse(parsedData.getStrings(), "strings.txt", outputDirectory, prefix, append);
-        parse(parsedData.getIntegers(), "integers.txt", outputDirectory, prefix, append);
-        parse(parsedData.getFloats(), "floats.txt", outputDirectory, prefix, append);
+	public void saveData(ParsedData parsedData, String outputDirectory, String prefix, boolean append)
+			throws SaveDataException {
 
-        System.out.println("Данные были сохранены.");
-    }
+		save(parsedData.getStrings(), "strings.txt", outputDirectory, prefix, append);
+		save(parsedData.getIntegers(), "integers.txt", outputDirectory, prefix, append);
+		save(parsedData.getFloats(), "floats.txt", outputDirectory, prefix, append);
 
-    private <T> void parse(List<T> data, String fileName, String outputDirectory, String prefix, boolean append) {
-        if (data == null || data.isEmpty()) {
-            System.out.println("Коллекция для файла '" + fileName + "' пуста. Файл не будет создан.");
-            return;
-        }
+		System.out.println("Данные были сохранены.");
+	}
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputDirectory + File.separator + prefix + fileName, append))) {
-            for (T item : data) {
-                writer.write(item.toString());
-                writer.newLine();
-            }
-            System.out.println("Данные успешно записаны в " + fileName);
-        } catch (IOException e) {
-            System.err.println("Ошибка при записи в файл " + fileName + ": " + e.getMessage());
-            e.printStackTrace();
-        }
-    }
+	private <T> void save(List<T> data, String fileName, String outputDirectory, String prefix, boolean append)
+			throws SaveDataException {
+		if (data == null || data.isEmpty()) {
+			System.out.println("Коллекция для файла '" + fileName + "' пуста. Файл не будет создан.");
+			return;
+		}
+
+		File outputFile = new File(outputDirectory + File.separator + prefix + fileName);
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile, append))) {
+			for (T item : data) {
+				writer.write(item.toString());
+				writer.newLine();
+			}
+
+		} catch (IOException e) {
+			throw new SaveDataException("Ошибка при записи данных в файл: " + fileName + e.getMessage() + "\n" + e);
+		}
+		System.out.println("Данные успешно записаны в " + fileName);
+	}
 }
