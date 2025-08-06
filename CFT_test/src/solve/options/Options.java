@@ -14,9 +14,6 @@ public class Options {
 	private StatisticsMode statMode = StatisticsMode.SHORT; // По умолчанию выводится краткая статистика
 	private List<String> inputFiles = new ArrayList<>();
 
-	private Options() {
-	}
-
 	public static Options fromArgs(String[] args) throws ParseOptionsException {
 		Options config = new Options();
 		config.parseArguments(args);
