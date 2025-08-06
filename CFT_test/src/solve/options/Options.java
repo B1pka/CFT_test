@@ -15,20 +15,21 @@ public class Options {
 	private List<String> inputFiles = new ArrayList<>();
 
 	public static Options fromArgs(String[] args) throws ParseOptionsException {
-		Options config = new Options();
-		config.parseArguments(args);
-		if (config.inputFiles.isEmpty()) {
-			System.err.println("Ошибка: не указаны входные файлы.");
-		}
+        Options config = new Options();
+        config.parseArguments(args);
+        
+        if (config.inputFiles.isEmpty()) {
+            throw new ParseOptionsException("Ошибка: не указаны входные файлы.");
+        }
 
-		try {
-			config.validOutputDirectory(config.outputDirectory);
-		} catch (IllegalArgumentException e) {
-			System.err.println(e.getMessage());
-		}
+        try {
+            config.isOutputDirectory(config.outputDirectory);
+        } catch (IllegalArgumentException e) {
+            throw new ParseOptionsException(e.getMessage(), e);
+        }
 
-		return config;
-	}
+        return config;
+    }
 
 	private void parseArguments(String[] args) {
 		for (int i = 0; i < args.length; i++) {
@@ -97,3 +98,4 @@ public class Options {
 		return inputFiles;
 	}
 }
+
