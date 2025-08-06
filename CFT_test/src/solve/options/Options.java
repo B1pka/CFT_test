@@ -63,7 +63,7 @@ public class Options {
 		}
 	}
 
-	public boolean validOutputDirectory(String outputDirectory) {
+	public boolean isOutputDirectory(String outputDirectory) {
 		File dir = new File(outputDirectory);
 
 		if (!dir.exists()) {
@@ -98,4 +98,5 @@ public class Options {
 		return inputFiles;
 	}
 }
+
 
