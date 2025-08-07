@@ -14,25 +14,18 @@ public class Options {
     private StatisticsMode statMode = StatisticsMode.SHORT;  // По умолчанию выводится краткая статистика
     private List<String> inputFiles = new ArrayList<>();
 
-<<<<<<< HEAD
     public static Options fromArgs(String[] args) throws ParseOptionsException {
-=======
-	public static Options fromArgs(String[] args) throws ParseOptionsException {
->>>>>>> a0a8e253db9cad17dbb4558239e2017dea7b8914
         Options config = new Options();
         config.parseArguments(args);
         
         if (config.inputFiles.isEmpty()) {
             throw new ParseOptionsException("Ошибка: не указаны входные файлы.");
         }
-<<<<<<< HEAD
         try {
             config.validateInputFiles(config.inputFiles);
         } catch (ParseOptionsException e) {
             throw new ParseOptionsException(e.getMessage(), e);
         }
-=======
->>>>>>> a0a8e253db9cad17dbb4558239e2017dea7b8914
 
         try {
             config.validateOutputDirectory(config.outputDirectory);
@@ -87,7 +80,6 @@ public class Options {
     private void validateInputFile(String filePath) throws ParseOptionsException {
         File file = new File(filePath);
 
-<<<<<<< HEAD
         if (!file.exists()) {
             throw new ParseOptionsException("Ошибка: файл не существует: " + filePath);
         }
@@ -97,10 +89,6 @@ public class Options {
     
     private void validateOutputDirectory(String outputDirectory) {
         File dir = new File(outputDirectory);
-=======
-	public void validateOutputDirectory(String outputDirectory) {
-		File dir = new File(outputDirectory);
->>>>>>> a0a8e253db9cad17dbb4558239e2017dea7b8914
 
         if (!dir.exists()) {
             throw new IllegalArgumentException("Ошибка: указанный путь для выходных файлов не существует: " + outputDirectory);
@@ -133,7 +121,3 @@ public class Options {
         return inputFiles;
     }
 }
-
-
-
-
